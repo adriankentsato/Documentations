@@ -8,6 +8,8 @@ This will define the setup process, softwares needed, and other things that are 
 - [7zip Installation](#7zip-installation)
 - [GIT Installation](#git-installation)
 - [VSCode Installation](#visual-studio-code-installation)
+- [MSYS Installation](#msys2-installation)
+- [NodeJS Installation](#nodejs-installation)
 
 ## The `SW` Folder
 
