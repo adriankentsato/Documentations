@@ -8,4 +8,5 @@ These are some documentations that I saved for references. These may contain ste
 ## Contents
 
 - [Microsoft Windows Development Environment](./Windows%20Development%20Environment.md)
+    - [Setting up MSYS](./Setting%20up%20MSYS.md)
 
