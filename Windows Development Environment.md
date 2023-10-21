@@ -10,6 +10,7 @@ This will define the setup process, softwares needed, and other things that are 
 - [VSCode Installation](#visual-studio-code-installation)
 - [MSYS Installation](#msys2-installation)
 - [NodeJS Installation](#nodejs-installation)
+- [Python Installation](#python-installation)
 
 ## The `SW` Folder
 
@@ -85,3 +86,46 @@ Open up the link above and click on the latest LTS 64-bit .zip file
 Once downloaded, open up the zip file and copy/extract the contents to `C:\SW\nodejs\` folder.
 ![NodeJS Folder](assets/nodejs_folder.png)
 
+## Python Installation
+
+Python is a high-level, general purpose programming language. Its design philosophy emphasizes code readability with the use of indentation.
+
+Our goal is to have it in our system in a portable way without the use of an installer.
+
+Direct Link: [Python Download](https://www.python.org/downloads/windows/)
+
+Open up the link above and click on the latest 64-bit Windows embeddable package.
+![Python Download Page](assets/python_download_page.png)
+
+Once downloaded open up the zip file and copy/extract its contents to `C:\SW\python\` folder.
+![Python Folder](assets/python_folder.png)
+
+Find `python<version>.zip` file and extract its contents into `python<version>` folder under `C:\SW\python`.
+![Python version zip](assets/python_version_zip.png)
+
+Open up `python<version>._pth` file in notepad and replace all text inside with the following:
+```py
+C:/SW/python/python312
+C:/SW/python/Scripts
+C:/SW/python
+
+import site
+
+```
+
+Create `sitecustomize.py` and add these:
+```py
+import os, sys
+
+sys.path = []
+path = "C:/SW/python"
+
+sys.path.append("")
+sys.path.append(os.path.join(path, "python312"))
+sys.path.append(os.path.join(path, "Scripts"))
+sys.path.append(path)
+sys.path.append(os.path.join(path, "Lib", "site-packages"))
+
+```
+
+And now your copy of python is portable and ready.
