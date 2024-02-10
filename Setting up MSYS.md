@@ -10,7 +10,7 @@ Once it is done initializing, enter these commands to get the environment up to 
 
 ```bash
 pacman -Syuu
-pacman -Su vim openssh
+pacman -Su vim openssh tmux
 pacman -Syuu
 ```
 
@@ -39,7 +39,29 @@ Open `~/.bashrc` using vim, and append this code to the end of the file.
 ```bash
 # This is the .bashrc file for the msys distro
 
-export PATH=$PATH:/c/sw/git/bin
+export PATH=$PATH:/c/sw/git/bin:/c/sw/nvim-win64/bin:/c/sw/mingw/bin:/c/sw/python:/c/sw/nodejs:/c/sw/rust/cargo/bin
+
+# gcc setup
+x_meow=/c/sw/mingw/include:/c/sw/mingw/include/freetype2
+if [ -z $C_INCLUDE_PATH ]; then
+    export C_INCLUDE_PATH=$x_meow
+else
+    export C_INCLUDE_PATH=$x_meow:$C_INCLUDE_PATH
+fi
+
+if [ -z $CPLUS_INCLUDE_PATH ]; then
+    export CPLUS_INCLUDE_PATH=$x_meow
+else
+    export CPLUS_INCLUDE_PATH=$x_meow:$CPLUS_INCLUDE_PATH
+fi
+
+# nvim setup
+export XDG_CONFIG_HOME=~/.config
+
+# rust setup
+export RUSTUP_HOME=/c/sw/rust/rustup
+export CARGO_HOME=/c/sw/rust/cargo
+export RUST_PATH=/c/sw/rust/cargo/bin
 
 # setup ssh-agent and prevent multiple instance
 env=~/.ssh/agent.env
@@ -52,17 +74,24 @@ agent_start () {
 
 agent_load_env
 
-# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2=agent not running
-agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
+registerSSH () {
+    # agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2=agent not running
+    agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
 
-if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
-    agent_start
-    ssh-add -t 600 ~/.ssh/rsa
-elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
-    ssh-add -t 600 ~/.ssh/rsa
-fi
+    if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
+        agent_start
+        ssh-add -t 600 ~/.ssh/rsa
+    elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
+        ssh-add -t 600 ~/.ssh/rsa
+    else
+        echo 'SSH KEYS VALID'
+    fi
+}
+
+registerSSH
 
 unset env
+unset x_meow
 ```
 </details>
 
