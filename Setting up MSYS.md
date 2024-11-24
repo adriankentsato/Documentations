@@ -39,7 +39,12 @@ Open `~/.bashrc` using vim, and append this code to the end of the file.
 ```bash
 # This is the .bashrc file for the msys distro
 
-export PATH=$PATH:/c/sw/git/bin:/c/sw/nvim-win64/bin:/c/sw/mingw/bin:/c/sw/python:/c/sw/nodejs:/c/sw/rust/cargo/bin
+export PATH=$PATH:/c/sw/git/bin:/c/sw/git/cmd # this is the git source version control
+export PATH=$PATH:/c/sw/nvim-win64/bin # neovim installation path
+export PATH=$PATH:/c/sw/mingw/bin # nuwen mingw GCC C compiler
+export PATH=$PATH:/c/sw/python:/c/sw/python/scripts # we will include the python scripts path in order for the pip to work
+export PATH=$PATH:/c/sw/nodejs # nodejs
+export PATH=$PATH:/c/sw/rust/cargo/bin # rust
 
 # gcc setup
 x_meow=/c/sw/mingw/include:/c/sw/mingw/include/freetype2
