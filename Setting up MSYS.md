@@ -45,6 +45,7 @@ export PATH=$PATH:/c/sw/mingw/bin # nuwen mingw GCC C compiler
 export PATH=$PATH:/c/sw/python:/c/sw/python/scripts # we will include the python scripts path in order for the pip to work
 export PATH=$PATH:/c/sw/nodejs # nodejs
 export PATH=$PATH:/c/sw/rust/cargo/bin # rust
+export PATH=$PATH:/c/sw/jdk/bin # java
 
 # gcc setup
 x_meow=/c/sw/mingw/include:/c/sw/mingw/include/freetype2
@@ -59,6 +60,9 @@ if [ -z $CPLUS_INCLUDE_PATH ]; then
 else
     export CPLUS_INCLUDE_PATH=$x_meow:$CPLUS_INCLUDE_PATH
 fi
+
+# JAVA SETUP
+export JAVA_HOME=/c/sw/jdk
 
 # nvim setup
 export XDG_CONFIG_HOME=~/.config
