@@ -85,7 +85,7 @@ agent_load_env
 
 registerSSH () {
     SSH_FILE=$1
-    if [ !"$SSH_FILE" ]; then
+    if [ -z "$SSH_FILE" ]; then
         SSH_FILE=~/.ssh/rsa
     fi
     # agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2=agent not running
